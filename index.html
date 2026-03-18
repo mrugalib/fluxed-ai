@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluxed AI — Always Evolving, Always Growing</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07050f;--surface:#0e0a1e;--surface2:#13102a;
+  --purple:#7c3aed;--pl:#a78bfa;--blue:#2563eb;--cyan:#06b6d4;
+  --text:#f0ebff;--muted:#8b7faa;--border:rgba(124,58,237,0.2);--border2:rgba(124,58,237,0.38);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+.blob{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0}
+.b1{width:700px;height:700px;background:rgba(124,58,237,0.12);top:-250px;left:-150px}
+.b2{width:500px;height:500px;background:rgba(37,99,235,0.08);bottom:0;right:-150px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(7,5,15,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.lt{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--text);letter-spacing:-.5px}
+.lt em{color:var(--pl);font-style:normal}
+.nl{display:flex;gap:4px}
+.nla{color:var(--muted);text-decoration:none;font-size:14px;padding:7px 15px;border-radius:100px;transition:all .2s}
+.nla:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.ncta{background:var(--purple);color:white;border:none;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.ncta:hover{background:#6d28d9;box-shadow:0 6px 24px rgba(124,58,237,.45)}
+
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:130px 40px 80px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);border-radius:100px;padding:6px 18px;font-size:13px;color:var(--pl);margin-bottom:36px;animation:up .7s ease both}
+.dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:glow 2s ease infinite}
+@keyframes glow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(40px,7.5vw,80px);font-weight:800;line-height:1.04;letter-spacing:-2.5px;margin-bottom:24px;animation:up .7s ease .08s both}
+.g{background:linear-gradient(135deg,#a78bfa 0%,#60a5fa 55%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hs{font-size:clamp(15px,2vw,19px);color:var(--muted);max-width:520px;margin:0 auto 44px;font-weight:300;line-height:1.75;animation:up .7s ease .15s both}
+.hb{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:up .7s ease .22s both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:100px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .28s;text-decoration:none;border:none}
+.bp{background:linear-gradient(135deg,var(--purple),var(--blue));color:white;box-shadow:0 0 36px rgba(124,58,237,.28)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 10px 44px rgba(124,58,237,.48)}
+.bs{background:transparent;color:var(--text);border:1px solid var(--border)}
+.bs:hover{border-color:var(--border2);background:rgba(124,58,237,.06)}
+
+.features{position:relative;z-index:1;padding:100px 48px;max-width:1140px;margin:0 auto}
+.sl{font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--pl);margin-bottom:14px;text-align:center}
+.st{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:800;text-align:center;margin-bottom:14px;letter-spacing:-1px}
+.ss{text-align:center;color:var(--muted);font-size:16px;max-width:460px;margin:0 auto 56px;font-weight:300}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;transition:all .28s;cursor:pointer}
+.card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 24px 64px rgba(0,0,0,.32)}
+.ci{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.card h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px}
+.card p{font-size:13px;color:var(--muted);line-height:1.65}
+.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:100px;margin-top:12px;font-weight:500;background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
+
+.cw{position:relative;z-index:1;padding:40px 48px 100px;max-width:920px;margin:0 auto}
+.cb{background:var(--surface);border:1px solid var(--border);border-radius:26px;overflow:hidden;box-shadow:0 48px 120px rgba(0,0,0,.52);display:flex;flex-direction:column;height:680px}
+.cbar{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--border);background:rgba(124,58,237,.06);flex-shrink:0}
+.cava{width:38px;height:38px;background:linear-gradient(135deg,var(--purple),var(--blue));border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:white;flex-shrink:0}
+.cname{font-weight:600;font-size:14px}
+.csub{font-size:11px;color:var(--muted)}
+.conl{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:#22c55e}
+.cdot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:glow 2s ease infinite}
+
+.msgs{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.msgs::-webkit-scrollbar{width:4px}
+.msgs::-webkit-scrollbar-thumb{background:rgba(124,58,237,.3);border-radius:4px}
+.msg{display:flex;gap:10px;animation:up .3s ease both;max-width:84%}
+.msg.bot{align-self:flex-start}
+.msg.usr{align-self:flex-end;flex-direction:row-reverse}
+.mava{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),var(--blue));font-family:'Syne',sans-serif;font-weight:800;font-size:11px;color:white}
+.mava.u{background:rgba(255,255,255,.08);font-size:14px}
+.bbl{padding:12px 16px;border-radius:18px 18px 18px 4px;font-size:14px;line-height:1.65;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.18);color:var(--text);white-space:pre-wrap;word-break:break-word}
+.msg.usr .bbl{background:linear-gradient(135deg,rgba(124,58,237,.28),rgba(37,99,235,.28));border-color:rgba(124,58,237,.35);border-radius:18px 18px 4px 18px}
+
+.typing{display:flex;gap:5px;align-items:center;padding:14px 16px}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--pl);animation:bounce 1.2s ease infinite}
+.typing span:nth-child(2){animation-delay:.18s}
+.typing span:nth-child(3){animation-delay:.36s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+
+.qw{padding:8px 20px 4px;display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0}
+.qr{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--pl);border-radius:100px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.qr:hover{background:rgba(124,58,237,.22);color:white}
+
+.ir{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--border);background:rgba(7,5,15,.6);flex-shrink:0}
+.ci2{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:none;height:48px;max-height:120px;line-height:1.5;transition:border .2s}
+.ci2:focus{border-color:var(--border2)}
+.ci2::placeholder{color:var(--muted)}
+.sb{width:48px;height:48px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--purple),var(--blue));color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.sb:hover{transform:scale(1.05);box-shadow:0 6px 20px rgba(124,58,237,.4)}
+.sb:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+.ctasec{position:relative;z-index:1;padding:20px 48px 100px;text-align:center}
+.ctai{max-width:680px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:32px;padding:56px 48px;position:relative;overflow:hidden}
+.ctai::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:360px;height:360px;background:radial-gradient(circle,rgba(124,58,237,.18),transparent 70%);pointer-events:none}
+.ctai h2{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:800;margin-bottom:14px;letter-spacing:-1px}
+.ctai p{color:var(--muted);font-size:16px;margin-bottom:30px;font-weight:300}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer p{font-size:13px;color:var(--muted)}
+
+@keyframes up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:640px){
+  nav{padding:14px 20px}.nl{display:none}
+  .hero{padding:100px 20px 60px}
+  .features{padding:60px 20px}
+  .cw{padding:30px 14px 60px}
+  .cb{height:580px}
+  .ctai{padding:36px 24px}
+  footer{padding:22px 20px;justify-content:center;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+
+<nav>
+  <div class="logo" onclick="scrollTo({top:0,behavior:'smooth'})">
+    <svg width="30" height="30" viewBox="0 0 36 36" fill="none">
+      <polygon points="18,1 34,10 34,26 18,35 2,26 2,10" fill="#6C2BD9"/>
+      <polygon points="18,5 30,12 30,24 18,31 6,24 6,12" fill="none" stroke="#9B5CF6" stroke-width="1" opacity="0.5"/>
+      <path d="M20,9 L14,19 L18,19 L16,27 L23,17 L19,17 Z" fill="white"/>
+    </svg>
+    <span class="lt">Fluxed <em>AI</em></span>
+  </div>
+  <div class="nl">
+    <a href="#features" class="nla">Features</a>
+    <a href="#chat" class="nla">Chat</a>
+  </div>
+  <button class="ncta" onclick="go('chat')">শুরু করো</button>
+</nav>
+
+<section class="hero">
+  <div class="badge"><span class="dot"></span>বাংলাদেশের university students-দের জন্য</div>
+  <h1>তোমার ক্যারিয়ার গড়ার<br><span class="g">সেরা AI সঙ্গী</span></h1>
+  <p class="hs">Career coaching, CV building, research assistance, business mentoring — সব এক জায়গায়। বিনামূল্যে। এখানেই।</p>
+  <div class="hb">
+    <button class="btn bp" onclick="go('chat')">এখনই কথা বলো</button>
+    <a href="#features" class="btn bs">কী কী আছে দেখো</a>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="sl">Features</div>
+  <h2 class="st">সব কিছু এক জায়গায়</h2>
+  <p class="ss">University জীবনের প্রতিটা challenge-এর জন্য আলাদা tool</p>
+  <div class="grid">
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('Career Coach হিসেবে আমাকে help করো'),600)">
+      <div class="ci" style="background:rgba(124,58,237,.15)">🎯</div>
+      <h3>Career Coach</h3><p>Personalized career roadmap ও next 6 মাসের exact action plan।</p>
+      <span class="tag">Free</span>
+    </div>
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('আমার জন্য ATS-friendly CV বানাও'),600)">
+      <div class="ci" style="background:rgba(37,99,235,.15)">📄</div>
+      <h3>ATS CV Builder</h3><p>তোমার তথ্য দাও — professional ATS-friendly CV মিনিটে তৈরি।</p>
+      <span class="tag">Free</span>
+    </div>
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('Business Coach হিসেবে আমাকে guide করো'),600)">
+      <div class="ci" style="background:rgba(6,182,212,.15)">🚀</div>
+      <h3>Business Coach</h3><p>Zero থেকে startup — Bangladesh context-এ real guidance।</p>
+      <span class="tag">Free</span>
+    </div>
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('Research paper লিখতে help করো'),600)">
+      <div class="ci" style="background:rgba(34,197,94,.15)">📚</div>
+      <h3>Research Assistant</h3><p>Research paper থেকে citation — academic writing-এ complete support।</p>
+      <span class="tag">Free</span>
+    </div>
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('Life Coach হিসেবে আমাকে guide করো'),600)">
+      <div class="ci" style="background:rgba(251,146,60,.15)">🌱</div>
+      <h3>Life Coach</h3><p>Networking, communication skills, habits — সফল হওয়ার পথ।</p>
+      <span class="tag">Free</span>
+    </div>
+    <div class="card" onclick="go('chat');setTimeout(()=>sq('আমার জন্য একটা presentation বানাও'),600)">
+      <div class="ci" style="background:rgba(244,114,182,.15)">🎨</div>
+      <h3>Presentation Builder</h3><p>Topic দাও — slide-by-slide পুরো presentation structure তৈরি।</p>
+      <span class="tag">Free</span>
+    </div>
+  </div>
+</section>
+
+<section class="cw" id="chat">
+  <div class="sl">AI Chat</div>
+  <h2 class="st" style="margin-bottom:10px">Fluxed AI-এর সাথে কথা বলো</h2>
+  <p class="ss" style="margin-bottom:28px">যেকোনো প্রশ্ন করো — কোনো signup লাগবে না</p>
+  <div class="cb">
+    <div class="cbar">
+      <div class="cava">F</div>
+      <div><div class="cname">Fluxed AI</div><div class="csub">Always evolving, always growing</div></div>
+      <div class="conl"><span class="cdot"></span>Online</div>
+    </div>
+    <div class="msgs" id="msgs"></div>
+    <div class="qw" id="qw">
+      <button class="qr" onclick="sq('Career Coach হিসেবে help করো')">Career Coach</button>
+      <button class="qr" onclick="sq('ATS-friendly CV বানাও')">CV Builder</button>
+      <button class="qr" onclick="sq('Business Coach হিসেবে guide করো')">Business Coach</button>
+      <button class="qr" onclick="sq('Research paper লিখতে help করো')">Research</button>
+      <button class="qr" onclick="sq('Life Coach হিসেবে guide করো')">Life Coach</button>
+      <button class="qr" onclick="sq('Presentation বানাতে help করো')">Presentation</button>
+    </div>
+    <div class="ir">
+      <textarea class="ci2" id="inp" placeholder="এখানে লিখো..." rows="1" onkeydown="hk(event)" oninput="ar(this)"></textarea>
+      <button class="sb" id="sbtn" onclick="send()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="ctasec">
+  <div class="ctai">
+    <h2>আজই শুরু করো<br><span class="g">বিনামূল্যে</span></h2>
+    <p>তোমার ক্যারিয়ার, CV, business — সব কিছুতে Fluxed AI তোমার পাশে।</p>
+    <button class="btn bp" onclick="go('chat')">এখনই chat করো</button>
+  </div>
+</section>
+
+<footer>
+  <div style="display:flex;align-items:center;gap:10px">
+    <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><polygon points="18,1 34,10 34,26 18,35 2,26 2,10" fill="#6C2BD9"/><path d="M20,9 L14,19 L18,19 L16,27 L23,17 L19,17 Z" fill="white"/></svg>
+    <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#f0ebff">Fluxed <span style="color:#a78bfa">AI</span></span>
+  </div>
+  <p style="font-style:italic">Always evolving, always growing</p>
+  <p>2026 Fluxed AI</p>
+</footer>
+
+<script>
+let history = [];
+let busy = false;
+
+async function callAPI(userMsg) {
+  history.push({ role: 'user', parts: [{ text: userMsg }] });
+  const recent = history.slice(-20);
+
+  const res = await fetch('/.netlify/functions/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ history: recent })
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'API error');
+
+  history.push({ role: 'model', parts: [{ text: data.reply }] });
+  return data.reply;
+}
+
+function addBot(text) {
+  const m = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg bot';
+  d.innerHTML = `<div class="mava">F</div><div class="bbl">${fmt(text)}</div>`;
+  m.appendChild(d);
+  m.scrollTop = m.scrollHeight;
+}
+
+function addUser(text) {
+  const m = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg usr';
+  d.innerHTML = `<div class="bbl">${esc(text)}</div><div class="mava u">👤</div>`;
+  m.appendChild(d);
+  m.scrollTop = m.scrollHeight;
+}
+
+function showTyp() {
+  const m = document.getElementById('msgs');
+  const d = document.createElement('div');
+  d.className = 'msg bot'; d.id = 'typ';
+  d.innerHTML = `<div class="mava">F</div><div class="bbl typing"><span></span><span></span><span></span></div>`;
+  m.appendChild(d);
+  m.scrollTop = m.scrollHeight;
+}
+
+function rmTyp() { const t = document.getElementById('typ'); if(t) t.remove(); }
+
+function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function fmt(t) {
+  return esc(t)
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>')
+    .replace(/\n/g,'<br>');
+}
+
+async function send() {
+  const inp = document.getElementById('inp');
+  const txt = inp.value.trim();
+  if (!txt || busy) return;
+  inp.value = ''; ar(inp);
+  document.getElementById('qw').style.display = 'none';
+  addUser(txt);
+  busy = true;
+  document.getElementById('sbtn').disabled = true;
+  showTyp();
+
+  try {
+    const reply = await callAPI(txt);
+    rmTyp();
+    addBot(reply);
+  } catch(e) {
+    rmTyp();
+    addBot('কিছু একটা সমস্যা হয়েছে। একটু পরে আবার try করো।');
+    console.error(e);
+  }
+
+  busy = false;
+  document.getElementById('sbtn').disabled = false;
+}
+
+function sq(txt) { document.getElementById('inp').value = txt; send(); }
+function hk(e) { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} }
+function ar(el) { el.style.height='48px'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+function go(id) { document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    addBot('আসসালামু আলাইকুম! আমি Fluxed AI — তোমার university জীবনের সেরা সঙ্গী।\n\nCareer, CV, Business, Research, Life — যেকোনো বিষয়ে কথা বলো। আমি এখানেই আছি।');
+  }, 400);
+});
+</script>
+</body>
+</html>
